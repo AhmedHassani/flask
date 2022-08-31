@@ -164,4 +164,4 @@ def get_day7():
 
 
 if __name__=="__main__":
-    app2.run(debug=True,port=5002)
+    app2.run()
