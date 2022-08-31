@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="static/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        /* The heart of the matter */
+.testimonial-group > .row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.testimonial-group > .row > .col-xs-4 {
+  flex: 0 0 auto;
+}
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#56e3da;">
+    <a class="navbar-brand" href="#">The Weather</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Hours Forecast<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/day">Forecast For One Day<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/72">72 Hour Forecast<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/7day">7 Day Forecast <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Download Reports<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="post" action="/post1">
+            <input class="form-control mr-sm-2" name="city" type="search" placeholder="example : Baghdad " value="{{city}}"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Update Forecast</button>
+        </form>
+    </div>
+</nav>
+<section class="vh-100">
+    <h3>Forecast For 72 hours</h3>
+    <br>
+    <br>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">Dry temperature</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["temp_c"]}}°C</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">Visibility</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["vis_km"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">Wind speed(M/SEC)</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["wind_mph"]}} m/sec</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">Wind Direction</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{data["wind_degree"]}} {{d["wind_dir"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">Cloud</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["cloud"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3  btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">Pressure Station</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["pressure_mb"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3  btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">precip_mm</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["precip_mm"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">RH</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["humidity"]}} %</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">gust_kph</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["gust_kph"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">uv</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["uv"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">feelslike_c</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["feelslike_c"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">dewpoint_c</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["dewpoint_c"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">heatindex_c</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["heatindex_c"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">chance_of_rain</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["chance_of_rain"]}}</strong></p>
+                </div>
+                {%endfor%}
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <div class="container testimonial-group">
+        <div class="row text-center">
+            <div class="d-flex d-flex justify-content-start align-items-left mb-3">
+
+                <div class="flex-column border ml-3 btn-info"
+                     style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">chance_of_snow</p>
+                </div>
+                {%for dd in data%}
+                {%for d in dd['hour']%}
+                <div class="flex-column border ml-3" style="border-radius: 10px; padding: .85rem;width: 200px;">
+                    <p class="small mb-1">{{d['time']}}</p>
+                    <p class="small mb-0"><strong>{{d["chance_of_snow"]}}</strong></p>
+                </div>
+                {%endfor%}{%endfor%}
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+<footer class="page-footer font-small blue" style="background-color:#56e3da;">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2022 Copyright:
+    <a href="/"> Design by Eng.Samer Shuaa</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+</section>
+<script src="static/jquery.min.js"></script>
+</body>
+</html>

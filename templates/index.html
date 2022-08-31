@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="static/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        /* The heart of the matter */
+.testimonial-group > .row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.testimonial-group > .row > .col-xs-4 {
+  flex: 0 0 auto;
+}
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">The Weather</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Hours Forecast<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/day">Forecast For One Day<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/72">72 Hour Forecast<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/7day">7 Day Forecast <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/download">Download Reports<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="post" action="/post">
+            <input class="form-control mr-sm-2" name="city" type="search" placeholder="example : Baghdad " value="{{city}}"
+                   aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Update Forecast</button>
+        </form>
+    </div>
+</nav>
+<section class="vh-100">
+
+    <h3>Awos</h3>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#000; ">
+                <h5>Last Update {{current["last_updated"]}}</h5>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#000; ">
+                <h5>Temperature</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Dry temperature TTT  : {{data["temp_c"]}}°C</h6><br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#000; ">
+                <h5>Wind</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Wind Direction : {{data["wind_degree"]}} {{data["wind_dir"]}}</h6><br>
+            </div>
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Wind speed(M/SEC) : {{data["wind_mph"]}} m/sec</h6><br>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#000; ">
+                <h5>Pressure/Visibility</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Visibility : {{data["vis_km"] * 100}} m</h6><br>
+            </div>
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Pressure Station : {{data["pressure_mb"]}} hpa</h6><br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#000; ">
+                <h5>Feelslike/Humidity</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                 <h6>Feelslike : {{data["feelslike_c"]}}</h6><br>
+            </div>
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Humidity : {{data["humidity"]}} %</h6><br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#000; ">
+                <h5>Cloud/UV</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>Cloud : {{data["condition"]["text"]}}</h6><br>
+            </div>
+            <div class="col btn-primary" style="margin:5px;height:50px;text-align:center;color:#fff;">
+                <h6>UV : {{data["uv"]}}</h6><br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>`
+<footer class="page-footer font-small blue" style="background-color:#dedede;">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2022 Copyright:
+    <a href="/"> Design by Eng.Samer Shuaa</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+</section>
+
+<script src="static/jquery.min.js"></script>
+</body>
+
+</html>
